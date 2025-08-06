@@ -2,14 +2,14 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"golang-cyoa/parse"
+	"html/template"
 	"log"
 	"net/http"
 	"strings"
 )
 
-func CreateMux(story parse.Story) http.Handler {
+func CreateMux(story parse.Story) (http.Handler, error) {
 	mux := http.NewServeMux()
 
 	for name, chapter := range story {
@@ -17,16 +17,11 @@ func CreateMux(story parse.Story) http.Handler {
 		log.Println("Adding route for", path)
 
 		mux.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Content-Type", "text/html; charset=utf-8")
-			fmt.Fprintf(w, "<h1> %v </h1>", chapter.Title)
-
-			for _, paragraph := range chapter.Story {
-				fmt.Fprintf(w, "<p> %v </p>", paragraph)
+			t, err := template.ParseFiles("templates/page.html")
+			if err != nil {
+				panic(err)
 			}
-
-			for _, option := range chapter.Options {
-				fmt.Fprintf(w, "<p> <a href='/%v'>%v</a> </p>", option.Arc, option.Text)
-			}
+			t.Execute(w, chapter)
 		})
 
 	}
@@ -35,7 +30,7 @@ func CreateMux(story parse.Story) http.Handler {
 		http.Redirect(w, r, "/intro", http.StatusFound)
 	})
 
-	return mux
+	return mux, nil
 }
 
 func main() {
@@ -46,9 +41,9 @@ func main() {
 		panic(err)
 	}
 
-	mux := CreateMux(story)
+	mux, _ := CreateMux(story)
 
-	println("Listening on port 8080")
+	println("Running on  http://localhost:8080")
 	err = http.ListenAndServe(":8080", mux)
 	if err != nil {
 		log.Fatal(err)
