@@ -36,6 +36,8 @@ func CreateMux(story parse.Story) http.Handler {
 func main() {
 	storyFile := flag.String("f", "gopher.json", "path to story file")
 
+	flag.Parse()
+
 	story, err := parse.LoadStory(*storyFile)
 	if err != nil {
 		panic(err)
