@@ -6,6 +6,12 @@ Also, it felt really great becoming comfortable with `http.ServeMux`,
 `http.HandleFunc`, and the `html/template` library, as I have a sense I'll
 need to leverage those to a hefty degree for my thesis which I am writing.
 
+## Arguments
+```
+-f string
+        path to story file (default "gopher.json")
+```
+
 ## Bonus
 - [ ] Create a command-line version of our Choose Your Own Adventure application
 where stories are printed out to the terminal and options are picked via typing
