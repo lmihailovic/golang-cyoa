@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func CreateMux(story parse.Story) (http.Handler, error) {
+func CreateMux(story parse.Story) http.Handler {
 	mux := http.NewServeMux()
 
 	for name, chapter := range story {
@@ -30,7 +30,7 @@ func CreateMux(story parse.Story) (http.Handler, error) {
 		http.Redirect(w, r, "/intro", http.StatusFound)
 	})
 
-	return mux, nil
+	return mux
 }
 
 func main() {
@@ -41,7 +41,7 @@ func main() {
 		panic(err)
 	}
 
-	mux, _ := CreateMux(story)
+	mux := CreateMux(story)
 
 	println("Running on  http://localhost:8080")
 	err = http.ListenAndServe(":8080", mux)
