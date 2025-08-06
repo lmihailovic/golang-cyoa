@@ -29,15 +29,5 @@ func LoadStory(file string) (Story, error) {
 
 	err = json.Unmarshal(bytes, &story)
 
-	//for _, v := range story {
-	//	fmt.Printf("\n\n== %v ==\n", v.Title)
-	//	for _, s := range v.Story {
-	//		println(s)
-	//	}
-	//	for index, o := range v.Options {
-	//		fmt.Printf("\nPress %v to %v", index+1, o.Text)
-	//	}
-	//}
-
 	return story, nil
 }
