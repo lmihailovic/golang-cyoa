@@ -21,7 +21,6 @@ type Options struct {
 func LoadStory(file string) (Story, error) {
 	bytes, err := os.ReadFile(file)
 	if err != nil {
-		panic(err)
 		return nil, err
 	}
 
