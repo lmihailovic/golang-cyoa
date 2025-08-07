@@ -30,6 +30,8 @@ func CreateMux(story parse.Story) http.Handler {
 		http.Redirect(w, r, "/intro", http.StatusFound)
 	})
 
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
+
 	return mux
 }
 

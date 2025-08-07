@@ -1,0 +1,71 @@
+body
+{
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1
+{
+    font-family: 'IBM Plex Serif', serif;
+    text-align: center;
+}
+
+p
+{
+    text-indent: 1rem;
+}
+
+hr
+{
+    margin-top: 3rem;
+    border: 1px solid #c0c0c0;
+}
+
+ul
+{
+    padding: 0;
+}
+
+li
+{
+    margin: 1rem 0;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+footer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p
+{
+    text-indent: 0;
+}
+
+.container
+{
+    margin: 3rem;
+    padding: 3rem 5rem;
+    background-color: #fffcf6;
+
+    max-width: 600px;
+
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
