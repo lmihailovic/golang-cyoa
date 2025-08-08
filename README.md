@@ -1,4 +1,7 @@
 # Choose your own adventure
+<img width="1707" height="799" alt="Screenshot of project working in the browser" src="https://github.com/user-attachments/assets/69526033-939a-4547-a1f6-9a912cf79c14" />
+<img width="863" height="405" alt="Screenshot of project working in the terminal" src="https://github.com/user-attachments/assets/a1745964-3b4a-42c4-8266-23f5162773b6" />
+
 This was a short and sweet project, and I really enjoyed writing it. It builds
 nicely over the material and concepts utilised in the previous two projects.
 
