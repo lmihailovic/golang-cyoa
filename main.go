@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func CreateMux(story parse.Story) http.Handler {
+func CreateMux(story parse.Story, tmpl *template.Template) http.Handler {
 	mux := http.NewServeMux()
 
 	for name, chapter := range story {
@@ -17,16 +17,16 @@ func CreateMux(story parse.Story) http.Handler {
 		log.Println("Adding route for", path)
 
 		mux.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
-			t, err := template.ParseFiles("templates/page.html")
-			if err != nil {
-				panic(err)
-			}
-			t.Execute(w, chapter)
+			tmpl.Execute(w, chapter)
 		})
 
 	}
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			http.NotFoundHandler().ServeHTTP(w, r)
+			return
+		}
 		http.Redirect(w, r, "/intro", http.StatusFound)
 	})
 
@@ -45,7 +45,9 @@ func main() {
 		panic(err)
 	}
 
-	mux := CreateMux(story)
+	tmpl := template.Must(template.ParseFiles("templates/page.html"))
+
+	mux := CreateMux(story, tmpl)
 
 	println("Running on  http://localhost:8080")
 	err = http.ListenAndServe(":8080", mux)
